@@ -16,7 +16,7 @@ pub struct ArrayBuffer<T, const N: usize> {
 }
 
 impl<T, const N: usize> ArrayBuffer<T, N> {
-    /// Creates a `ArrayBuffer` with a given capacity
+    /// Creates an `ArrayBuffer` with a given capacity
     pub fn with_capacity() -> ArrayBuffer<T, N> {
         let entries: [Option<T>; N] = unsafe {
             let mut arr: [Option<T>; N] = std::mem::MaybeUninit::uninit().assume_init();
