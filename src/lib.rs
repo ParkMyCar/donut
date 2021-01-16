@@ -1,6 +1,8 @@
-#![feature(const_fn)]
 #![feature(get_mut_unchecked)]
 
-pub mod buffer;
-pub mod consumer;
-pub mod producer;
+mod buffer;
+pub use buffer::slab::SlabBuffer;
+pub use buffer::array::ArrayBuffer;
+
+mod consumer;
+mod producer;

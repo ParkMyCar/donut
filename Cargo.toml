@@ -1,5 +1,5 @@
 [package]
-name = "ringbuf"
+name = "donut"
 version = "0.1.0"
 authors = ["Parker Timmerman <parker@parkertimmerman.com>"]
 edition = "2018"
@@ -8,3 +8,11 @@ edition = "2018"
 
 [dependencies]
 slab = "0.4"
+
+[dev-dependencies]
+criterion = "0.3"
+ringbuf = "0.2"
+
+[[bench]]
+name = "buffer"
+harness = false

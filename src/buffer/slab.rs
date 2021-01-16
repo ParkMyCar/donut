@@ -14,7 +14,7 @@ use crate::{
     producer::Producer,
 };
 
-pub struct RingBuffer<T, const N: usize> {
+pub struct SlabBuffer<T, const N: usize> {
     pub(crate) entries: Slab<T>,
     pub(crate) index: [usize; N],
 
@@ -22,15 +22,15 @@ pub struct RingBuffer<T, const N: usize> {
     pub(crate) write_ptr: AtomicUsize,
 }
 
-impl<T, const N: usize> RingBuffer<T, N> {
-    /// Creates a `RingBuffer` with a given capacity
-    pub fn with_capacity() -> RingBuffer<T, N> {
+impl<T, const N: usize> SlabBuffer<T, N> {
+    /// Creates a `SlabBuffer` with a given capacity
+    pub fn with_capacity() -> SlabBuffer<T, N> {
         let entries = Slab::with_capacity(N);
         let index = [std::usize::MAX; N];
         let read_ptr = AtomicUsize::new(0);
         let write_ptr = AtomicUsize::new(0);
 
-        RingBuffer {
+        SlabBuffer {
             entries,
             index,
             read_ptr,
@@ -38,7 +38,7 @@ impl<T, const N: usize> RingBuffer<T, N> {
         }
     }
 
-    /// Creates a `Producer` and `Consumer` from a `RingBuffer`.
+    /// Creates a `Producer` and `Consumer` from a `SlabBuffer`.
     pub fn split(self) -> (Producer<T, N>, Consumer<T, N>) {
         let arc = Arc::new(self);
 
@@ -74,11 +74,11 @@ impl<T, const N: usize> RingBuffer<T, N> {
 
 #[cfg(test)]
 mod tests {
-    use super::RingBuffer;
+    use super::SlabBuffer;
 
     #[test]
     fn basic() {
-        let buffer: RingBuffer<u64, 4> = RingBuffer::with_capacity();
+        let buffer: SlabBuffer<u64, 4> = SlabBuffer::with_capacity();
         let (mut prod, mut cons) = buffer.split();
 
         prod.push(64);

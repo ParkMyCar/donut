@@ -1,4 +1,4 @@
-use crate::buffer::RingBuffer;
+use crate::buffer::slab::SlabBuffer;
 use std::{
     sync::{
         Arc,
@@ -7,11 +7,11 @@ use std::{
 };
 
 pub struct Consumer<T, const N: usize> {
-    buffer: Arc<RingBuffer<T, N>>,
+    buffer: Arc<SlabBuffer<T, N>>,
 }
 
 impl<T, const N: usize> Consumer<T, N> {
-    pub(crate) fn new(buffer: Arc<RingBuffer<T, N>>) -> Consumer<T, N> {
+    pub(crate) fn new(buffer: Arc<SlabBuffer<T, N>>) -> Consumer<T, N> {
         Consumer { buffer }
     }
 
