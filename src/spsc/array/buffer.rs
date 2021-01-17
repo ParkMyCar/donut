@@ -67,9 +67,4 @@ impl<T, const N: usize> ArrayBuffer<T, N> {
 
         write_ptr - read_ptr
     }
-
-    /// The capacity of the buffer.
-    pub const fn capacity(&self) -> usize {
-        N
-    }
 }

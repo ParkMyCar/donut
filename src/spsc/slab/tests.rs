@@ -2,7 +2,7 @@ use super::buffer::SlabBuffer;
 
 #[test]
 fn basic() {
-    let buffer: SlabBuffer<u64, 4> = SlabBuffer::with_capacity();
+    let buffer: SlabBuffer<u64, 4> = SlabBuffer::new();
     let (mut prod, mut cons) = buffer.split();
 
     prod.push(64);

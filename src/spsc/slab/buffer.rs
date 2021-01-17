@@ -23,7 +23,7 @@ pub struct SlabBuffer<T, const N: usize> {
 
 impl<T, const N: usize> SlabBuffer<T, N> {
     /// Creates a `SlabBuffer` with a given capacity
-    pub fn with_capacity() -> SlabBuffer<T, N> {
+    pub fn new() -> SlabBuffer<T, N> {
         let entries = Slab::with_capacity(N);
         let index = [std::usize::MAX; N];
         let read_ptr = AtomicUsize::new(0);
@@ -63,10 +63,5 @@ impl<T, const N: usize> SlabBuffer<T, N> {
         let write_ptr = self.write_ptr.load(Ordering::SeqCst);
 
         write_ptr - read_ptr
-    }
-
-    /// The capacity of the buffer.
-    pub const fn capacity(&self) -> usize {
-        N
     }
 }
