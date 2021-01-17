@@ -23,7 +23,7 @@ fn bench_donut_slab_256_x_1_000(c: &mut Criterion) {
 }
 
 fn bench_donut_array_slab_256_x_1_000(c: &mut Criterion) {
-    let buffer: ArrayBuffer<u64, 256> = ArrayBuffer::with_capacity();
+    let buffer: ArrayBuffer<u64, 256> = ArrayBuffer::new();
     let (mut prod, mut cons) = buffer.split();
 
     c.bench_function("donut array 256 x 1_000", |b| b.iter(|| 

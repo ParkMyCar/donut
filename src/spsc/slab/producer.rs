@@ -1,10 +1,10 @@
-use crate::buffer::slab::SlabBuffer;
 use std::{
     sync::{
         Arc,
         atomic::Ordering,
     },
 };
+use super::buffer::SlabBuffer;
 
 pub struct Producer<T, const N: usize> {
     buffer: Arc<SlabBuffer<T, N>>,
